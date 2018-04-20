@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RReviews.Client
 {
-    class Program
+    class MainEntry
     {
         static void Main(string[] args)
         {
