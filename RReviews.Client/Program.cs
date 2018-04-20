@@ -10,6 +10,7 @@ namespace RReviews.Client
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Application Runs");
         }
     }
 }

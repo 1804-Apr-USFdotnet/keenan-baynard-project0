@@ -8,5 +8,6 @@ namespace RReviews.BLL
 {
     public class Class1
     {
+
     }
 }
