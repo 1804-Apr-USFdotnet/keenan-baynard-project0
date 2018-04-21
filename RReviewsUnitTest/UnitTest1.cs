@@ -10,12 +10,15 @@ namespace RReviewsUnitTest
     public class UnitTest1
     {
         Restaurant restaurant = new Restaurant("Fogo De Chao", "Minneapolis", "Minnesota");
+        Restaurant restaurant2 = new Restaurant("Wendys", "Templs Terrace", "Florida");
+        Restaurant restaurant3 = new Restaurant("Chipotle", "St. Paul", "Minnesota");
+        Restaurant restaurant4 = new Restaurant("Ritas", "Lancaster", "Pennsylvania");
+        Restaurant Restaurant5 = new Restaurant("Qdoba", "Templ Terrace", "Florida");
 
         [TestMethod]
         public void GetRestaurantLocationUnitTest()
         {
             //arrange
-            
             string expected = "Minneapolis, Minnesota";
 
             //act
@@ -25,15 +28,34 @@ namespace RReviewsUnitTest
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void GetRestaurantDetailsUnitTest()
+        public void GetResaurantAvgReviewUnitTest()
         {
-            //ReviewComment()
-        }
-        [TestMethod]
-        public void GetResaurantReviewsUnitTest()
-        {
-            //AddReview()
-            //Reviews.get
+            //arrange
+            restaurant.AddReview(new Review
+            {
+                ResturuantName = "Fogo De Chao",
+                ReviewComment = "good service, good food. Was very  happy with how the place looked and very clean",
+                ReviewNumber = 4.5,
+                ReviewerName="Keenan Baynard"
+                
+            });
+            restaurant.AddReview(new Review
+            {
+                ResturuantName = "Fogo De Chao",
+                ReviewComment = "terrible, food was aweful, service was slow, and my table was not cleaned",
+                ReviewNumber = 0.5,
+                ReviewerName = "Joe Johnson"
+
+            });
+            double expected = 2.5;
+
+            //act
+            var actual = restaurant.GetAvgReview();
+
+            //assert
+            Assert.AreEqual(expected, actual);
+
+
         }
         [TestMethod]
         public void GetBestReviewedRestaurantsTop3UnitTest()

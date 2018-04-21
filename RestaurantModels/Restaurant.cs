@@ -12,13 +12,14 @@ namespace RestaurantModels
         public string City { get; private set; }
         public string State { get; private set; }
         public string Name { get; private set; }
-        public List<Review> Reviews { get; set; }
+        public List<Review> Reviews { get; private set; }
         public string FoodType { get; set; }
         public string OperationHours { get; private set; }
         
 
         public Restaurant(string name, string city, string state)
         {
+            Reviews = new List<Review>();
             Name = name;
             City = city;
             State = state;
@@ -34,9 +35,9 @@ namespace RestaurantModels
             Reviews.Add(review);
         }
 
-        public double GetAvgReview(List<Review> reviews)
+        public double GetAvgReview()
         {
-            double result = reviews.Sum(item => item.ReviewNumber) / reviews.Count;
+            double result = Reviews.Sum(item => item.ReviewNumber) / Reviews.Count;
             return result;
         }
 
