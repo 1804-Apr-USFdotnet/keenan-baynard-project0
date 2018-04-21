@@ -9,11 +9,13 @@ namespace RReviewsUnitTest
     [TestClass]
     public class UnitTest1
     {
+        Restaurant restaurant = new Restaurant("Fogo De Chao", "Minneapolis", "Minnesota");
+
         [TestMethod]
         public void GetRestaurantLocationUnitTest()
         {
             //arrange
-            Restaurant restaurant = new Restaurant("Minneapolis", "Minnesota");
+            
             string expected = "Minneapolis, Minnesota";
 
             //act
@@ -25,42 +27,49 @@ namespace RReviewsUnitTest
         [TestMethod]
         public void GetRestaurantDetailsUnitTest()
         {
-
+            //ReviewComment()
         }
         [TestMethod]
         public void GetResaurantReviewsUnitTest()
         {
-
+            //AddReview()
+            //Reviews.get
+        }
+        [TestMethod]
+        public void GetBestReviewedRestaurantsTop3UnitTest()
+        {
+            //AddReview()
+            //GetBestReviewedRestaurantsTop3()
         }
         [TestMethod]
         public void GetResturantFullNameUnitTest()
         {
-
+            //Method in BLL
         }
         [TestMethod]
-        public void GetResturantByNameAscending()
+        public void GetResturantsByNameAscendingUnitTest()
         {
-
+            //Method in BLL
         }
         [TestMethod]
-        public void GetResturantByNameDescending()
+        public void GetResturantsByNameDescendingUnitTest()
         {
-
+            //Method in BLL
         }
         [TestMethod]
-        public void GetRestaurantByLocationCityAscending()
+        public void GetRestaurantsByLocationCityAscendingUnitTest()
         {
-
+            //Method in BLL
         }
         [TestMethod]
-        public void GetRestaurantByLocationCityDescending()
+        public void GetRestaurantsByLocationCityDescendingUnitTest()
         {
-
+            //Method in BLL
         }
         [TestMethod]
-        public void GetAllRestaurantsByReviewAscending()
+        public void GetAllRestaurantsByReviewAscendingUnitTest()
         {
-
+            //Method in BLL
         }
     }
 }

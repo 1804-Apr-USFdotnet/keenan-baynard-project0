@@ -8,8 +8,15 @@ namespace RestaurantModels.Interfaces
 {
     interface IRestaurant
     {
-        string City { get; set; }
-        string State { get; set; }
+        string Name { get; }
+        string City { get; }
+        string State { get; }
+        string FoodType { get; set; }
+        string OperationHours { get; }
+        List<Review> Reviews { get; set; }
         string GetLocation();
+        void AddReview(Review review);
+        double GetAvgReview(List<Review> reviews);
+        void SetOperationHours(string sun, string mon, string tue, string wed, string thur, string friday, string sat);
     }
 }
