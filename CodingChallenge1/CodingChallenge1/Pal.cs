@@ -17,7 +17,7 @@ namespace CodingChallenge1
             bool test = false;
             for (int i = 0; i < length / 2; i++)
             {
-                if (p[i] == p[length - 1 - i])
+                if (p[i].ToString().Equals(p[length-1-i].ToString(),StringComparison.InvariantCultureIgnoreCase))
                 {
                     test = true;
                 }
