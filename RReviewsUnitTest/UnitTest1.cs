@@ -35,7 +35,7 @@ namespace RReviewsUnitTest
             {
                 ResturuantName = "Fogo De Chao",
                 ReviewComment = "good service, good food. Was very  happy with how the place looked and very clean",
-                ReviewNumber = 4.5,
+                ReviewRating = 4.5,
                 ReviewerName="Keenan Baynard"
                 
             });
@@ -43,7 +43,7 @@ namespace RReviewsUnitTest
             {
                 ResturuantName = "Fogo De Chao",
                 ReviewComment = "terrible, food was aweful, service was slow, and my table was not cleaned",
-                ReviewNumber = 0.5,
+                ReviewRating = 0.5,
                 ReviewerName = "Joe Johnson"
 
             });

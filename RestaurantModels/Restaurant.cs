@@ -37,7 +37,7 @@ namespace RestaurantModels
 
         public double GetAvgReview()
         {
-            double result = Reviews.Sum(item => item.ReviewNumber) / Reviews.Count;
+            double result = Reviews.Sum(item => item.ReviewRating) / Reviews.Count;
             return result;
         }
 

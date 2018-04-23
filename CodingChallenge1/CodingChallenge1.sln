@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodingChallenge1", "CodingChallenge1\CodingChallenge1.csproj", "{16FD21CE-4783-4EC7-B898-DFD0C2E28F76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PalUnitTest", "PalUnitTest\PalUnitTest.csproj", "{4534025B-111C-4858-A011-24A141CDB980}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16FD21CE-4783-4EC7-B898-DFD0C2E28F76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FD21CE-4783-4EC7-B898-DFD0C2E28F76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FD21CE-4783-4EC7-B898-DFD0C2E28F76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FD21CE-4783-4EC7-B898-DFD0C2E28F76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4534025B-111C-4858-A011-24A141CDB980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4534025B-111C-4858-A011-24A141CDB980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4534025B-111C-4858-A011-24A141CDB980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4534025B-111C-4858-A011-24A141CDB980}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2649FCB8-15C0-41F2-9EFC-A7F6F0EB76A3}
+	EndGlobalSection
+EndGlobal
