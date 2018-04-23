@@ -10,7 +10,7 @@ namespace CodingChallenge1
     {
         static void Main(string[] args)
         {
-            Console.Write("Enter string to check if is palindrome: ");
+            Console.Write("Enter string to check if it is a palindrome: ");
             string ToTest = Console.ReadLine();
             bool check = Pal.Check(ToTest);
             if (check)

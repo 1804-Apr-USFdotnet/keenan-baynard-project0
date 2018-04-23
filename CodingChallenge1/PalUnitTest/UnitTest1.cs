@@ -37,5 +37,15 @@ namespace PalUnitTest
 
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void PalUnitTes4()
+        {
+            string TestString = "R,,,     ace,, CAR";
+            bool expected = true;
+
+            bool actual = Pal.Check(TestString);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
