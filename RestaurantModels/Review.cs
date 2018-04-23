@@ -19,9 +19,9 @@ namespace RestaurantModels
         public string GetFormattedReview()
         {
             string formatted =
-                ResturuantName + ": \n\t" +
-                ReviewerName + ": \n\t" +
-                ReviewComment;
+                "Restaurant Name: "+ResturuantName + ": \n\t" +
+                "Reviewer Name: "+ReviewerName + ": \n\t" +
+                "Written Review: ("+ReviewRating+") "+ReviewComment;
             return formatted;
         }
     }

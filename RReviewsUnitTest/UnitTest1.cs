@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestaurantModels;
 using RReviews.BLL;
@@ -13,7 +16,7 @@ namespace RReviewsUnitTest
         Restaurant restaurant2 = new Restaurant("Wendys", "Templs Terrace", "Florida");
         Restaurant restaurant3 = new Restaurant("Chipotle", "St. Paul", "Minnesota");
         Restaurant restaurant4 = new Restaurant("Ritas", "Lancaster", "Pennsylvania");
-        Restaurant Restaurant5 = new Restaurant("Qdoba", "Templ Terrace", "Florida");
+        Restaurant restaurant5 = new Restaurant("Qdoba", "Templ Terrace", "Florida");
 
         [TestMethod]
         public void GetRestaurantLocationUnitTest()
@@ -71,7 +74,26 @@ namespace RReviewsUnitTest
         [TestMethod]
         public void GetResturantsByNameAscendingUnitTest()
         {
-            //Method in BLL
+            SearchRestaurants.restaurants.Add(restaurant);
+            SearchRestaurants.restaurants.Add(restaurant2);
+            SearchRestaurants.restaurants.Add(restaurant3);
+            SearchRestaurants.restaurants.Add(restaurant4);
+            SearchRestaurants.restaurants.Add(restaurant5);
+
+
+            List<Restaurant> expected = new List<Restaurant>
+            {
+                restaurant3,
+                restaurant,
+                restaurant5,
+                restaurant4,
+                restaurant2
+            };
+
+
+            List<Restaurant> actual = SearchRestaurants.GetResturantsByNameAscending();
+
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void GetResturantsByNameDescendingUnitTest()
