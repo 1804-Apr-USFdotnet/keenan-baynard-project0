@@ -17,6 +17,8 @@ namespace RReviewsUnitTest
         Restaurant restaurant3 = new Restaurant("Chipotle", "St. Paul", "Minnesota");
         Restaurant restaurant4 = new Restaurant("Ritas", "Lancaster", "Pennsylvania");
         Restaurant restaurant5 = new Restaurant("Qdoba", "Temple Terrace", "Florida");
+
+
         public void init()
         {
             //adding reviews
