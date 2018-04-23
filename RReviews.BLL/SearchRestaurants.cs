@@ -46,22 +46,26 @@ namespace RReviews.BLL
 
         public static List<Restaurant> GetRestaurantsByLocationCityAscending()
         {
-            return null;
+            var sortedAsc = restaurants.OrderBy(x => x.City).ToList();
+            return sortedAsc;
         }
 
         public static List<Restaurant> GetRestaurantsByLocationCityDescending()
         {
-            return null;
+            var sortedDesc = restaurants.OrderByDescending(x => x.City).ToList();
+            return sortedDesc;
         }
 
         public static List<Restaurant> GetAllRestaurantsByReviewAscending()
         {
-            return null;
+            var sortedAsc = restaurants.OrderBy(x => x.GetAvgReview()).ToList();
+            return sortedAsc;
         }
 
         public static List<Restaurant> GetBestReviewedRestaurantsTop3()
         {
-            return null;
+            var sorted = GetAllRestaurantsByReviewAscending();
+            return sorted.GetRange(0, 3);
         }
     }
 }

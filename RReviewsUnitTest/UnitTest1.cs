@@ -13,11 +13,61 @@ namespace RReviewsUnitTest
     public class UnitTest1
     {
         Restaurant restaurant = new Restaurant("Fogo De Chao", "Minneapolis", "Minnesota");
-        Restaurant restaurant2 = new Restaurant("Wendys", "Templs Terrace", "Florida");
+        Restaurant restaurant2 = new Restaurant("Wendys", "Tampa", "Florida");
         Restaurant restaurant3 = new Restaurant("Chipotle", "St. Paul", "Minnesota");
         Restaurant restaurant4 = new Restaurant("Ritas", "Lancaster", "Pennsylvania");
-        Restaurant restaurant5 = new Restaurant("Qdoba", "Templ Terrace", "Florida");
+        Restaurant restaurant5 = new Restaurant("Qdoba", "Temple Terrace", "Florida");
+        public void init()
+        {
+            //adding reviews
+            restaurant.AddReview(new Review
+            {
+                ResturuantName = "Fogo De Chao",
+                ReviewComment = "good service, good food. Was very  happy with how the place looked and very clean",
+                ReviewRating = 4.5,
+                ReviewerName = "Keenan Baynard"
 
+            });
+            restaurant.AddReview(new Review
+            {
+                ResturuantName = "Fogo De Chao",
+                ReviewComment = "terrible, food was aweful, service was slow, and my table was not cleaned",
+                ReviewRating = 0.5,
+                ReviewerName = "Joe Johnson"
+
+            });
+            restaurant2.AddReview(new Review
+            {
+                ResturuantName = "Wendys",
+                ReviewRating = 1,
+
+            });
+            restaurant3.AddReview(new Review
+            {
+                ResturuantName = "Chipotle",
+                ReviewRating = 2,
+
+            });
+            restaurant4.AddReview(new Review
+            {
+                ResturuantName = "Ritas",
+                ReviewRating = 3,
+
+            });
+            restaurant5.AddReview(new Review
+            {
+                ResturuantName = "Qdoba",
+                ReviewRating = 4,
+
+            });
+
+            //adding restautants to list
+            SearchRestaurants.restaurants.Add(restaurant);
+            SearchRestaurants.restaurants.Add(restaurant2);
+            SearchRestaurants.restaurants.Add(restaurant3);
+            SearchRestaurants.restaurants.Add(restaurant4);
+            SearchRestaurants.restaurants.Add(restaurant5);
+        }
         [TestMethod]
         public void GetRestaurantLocationUnitTest()
         {
@@ -34,22 +84,7 @@ namespace RReviewsUnitTest
         public void GetResaurantAvgReviewUnitTest()
         {
             //arrange
-            restaurant.AddReview(new Review
-            {
-                ResturuantName = "Fogo De Chao",
-                ReviewComment = "good service, good food. Was very  happy with how the place looked and very clean",
-                ReviewRating = 4.5,
-                ReviewerName="Keenan Baynard"
-                
-            });
-            restaurant.AddReview(new Review
-            {
-                ResturuantName = "Fogo De Chao",
-                ReviewComment = "terrible, food was aweful, service was slow, and my table was not cleaned",
-                ReviewRating = 0.5,
-                ReviewerName = "Joe Johnson"
-
-            });
+            init();
             double expected = 2.5;
 
             //act
@@ -74,13 +109,7 @@ namespace RReviewsUnitTest
         [TestMethod]
         public void GetResturantsByNameAscendingUnitTest()
         {
-            SearchRestaurants.restaurants.Add(restaurant);
-            SearchRestaurants.restaurants.Add(restaurant2);
-            SearchRestaurants.restaurants.Add(restaurant3);
-            SearchRestaurants.restaurants.Add(restaurant4);
-            SearchRestaurants.restaurants.Add(restaurant5);
-
-
+            init();
             List<Restaurant> expected = new List<Restaurant>
             {
                 restaurant3,
@@ -98,22 +127,68 @@ namespace RReviewsUnitTest
         [TestMethod]
         public void GetResturantsByNameDescendingUnitTest()
         {
-            //Method in BLL
+            init();
+            List<Restaurant> expected = new List<Restaurant>
+            {
+                restaurant2,
+                restaurant4,
+                restaurant5,
+                restaurant,
+                restaurant3
+            };
+
+            List<Restaurant> actual = SearchRestaurants.GetResturantsByNameDescending();
+
+            CollectionAssert.AreEqual(expected,actual);
         }
         [TestMethod]
         public void GetRestaurantsByLocationCityAscendingUnitTest()
         {
-            //Method in BLL
+            init();
+            List<Restaurant> expected = new List<Restaurant>
+            {
+                restaurant4,
+                restaurant,
+                restaurant3,
+                restaurant2,
+                restaurant5
+            };
+
+            List<Restaurant> actual = SearchRestaurants.GetRestaurantsByLocationCityAscending();
+
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void GetRestaurantsByLocationCityDescendingUnitTest()
         {
-            //Method in BLL
+            init();
+            List<Restaurant> expected = new List<Restaurant>
+            {
+                restaurant5,
+                restaurant2,
+                restaurant4,
+                restaurant,
+                restaurant4
+            };
+
         }
         [TestMethod]
         public void GetAllRestaurantsByReviewAscendingUnitTest()
         {
-            //Method in BLL
+            init();
+            List<Restaurant> expected = new List<Restaurant>
+            {
+                restaurant2,
+                restaurant3,
+                restaurant,
+                restaurant4,
+                restaurant5
+            };
+
+
+            List<Restaurant> actual = SearchRestaurants.GetAllRestaurantsByReviewAscending();
+
+            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
