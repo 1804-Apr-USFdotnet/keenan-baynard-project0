@@ -12,7 +12,15 @@ namespace CodingChallenge1
         {
             Console.Write("Enter string to check if is palindrome: ");
             string ToTest = Console.ReadLine();
-            Console.WriteLine(Pal.Check(ToTest));
+            bool check = Pal.Check(ToTest);
+            if (check)
+            {
+                Console.WriteLine("Yes, " + ToTest + " is a palindrome");
+            }
+            else
+            {
+                Console.WriteLine("No, " + ToTest + " is not a palindrome");
+            }
         }
     }
 }
