@@ -13,7 +13,7 @@ namespace RReviews.Client
         static void Main(string[] args)
         {
             //Console.WriteLine("Application Runs");
-            SearchRestaurants.restaurants = Ser.Deserialize();
+            Ser.CreateList();
             //for (int i=0;i<5;i++)
             //{
             //    SearchRestaurants.restaurants[i].PrintInfo();
@@ -23,10 +23,65 @@ namespace RReviews.Client
             //    }
             //    Console.WriteLine("------------------------------------------------------------------------------------------------------");
             //}
+            Console.WriteLine("What would you like to do?: ");
+            Console.WriteLine("Type help for What you can do");
+            Console.WriteLine("Type find to find restaurant");
+            Console.WriteLine("Type exit to exit");
+            Console.WriteLine();
+            while (true)
+            {
+                string option = Console.ReadLine();
+                switch (option)
+                {
+                    case "find":
+                        Console.Write("Search for restaurant by full or parital name: ");
+                        string Search = Console.ReadLine();
+                        SearchRestaurants.ReturnGetRestaurantFullName(Search);
+                        Console.WriteLine();
+                        Console.WriteLine("select (restaurant name)");
+                        Console.WriteLine("back");
+                        option = Console.ReadLine();
+                        if (option.Length > "select".Length)
+                        {
+                            if (option.Substring(0, 6).Equals("select"))
+                            {
+                                //select method
+                            }
+                        }
+                        else if (option=="back")
+                        {
+                            goto case "find";
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please select valid option");
+                            Console.WriteLine();
+                        }
 
-            Console.Write("Search for restaurant by full or parital name: ");
-            string Search = Console.ReadLine();
-            SearchRestaurants.ReturnGetRestaurantFullName(Search);
+                        break;
+                    case "help":
+                        Console.WriteLine("Type find to find restaurant");
+                        Console.WriteLine("Type exit to exit");
+                        Console.WriteLine();
+                        break;
+                    case "exit":
+                        return;
+                    case "select":
+                        Console.WriteLine();
+                        Console.WriteLine("Select restuarant");
+                        break;
+
+
+
+
+
+
+
+                    default:
+                        Console.WriteLine("Please select valid option");
+                        break;
+                }
+            }
         }
     }
 }

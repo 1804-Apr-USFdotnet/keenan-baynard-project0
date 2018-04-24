@@ -10,7 +10,7 @@ namespace RReviews.BLL
     public static class SearchRestaurants
     {
         public static List<Restaurant> restaurants = new List<Restaurant>();
-        static Tuple<List<Restaurant>, string> GetRestaurantFullName(string PartialName)
+        private static Tuple<List<Restaurant>, string> GetRestaurantFullName(string PartialName)
         {
             if (PartialName != null && PartialName != "")
             {
@@ -40,18 +40,17 @@ namespace RReviews.BLL
 
         public static void ReturnGetRestaurantFullName(string PartialName)
         {
-            List<Restaurant> result = GetRestaurantFullName(PartialName).Item1;
-            string resultString = GetRestaurantFullName(PartialName).Item2;
-            if (restaurants != null)
+            Tuple<List<Restaurant>, string> result = GetRestaurantFullName(PartialName);
+            if (restaurants != null && result.Item1 != null)
             {
-                foreach (var item in result)
+                foreach (var item in result.Item1)
                 {
                     Console.WriteLine(item.Name);
                 }
             }
             else
             {
-                Console.WriteLine(resultString);
+                Console.WriteLine(result.Item2);
             }
         }
 
@@ -75,6 +74,7 @@ namespace RReviews.BLL
 
         public static List<Restaurant> GetResturantsByNameDescending()
         {
+            //check if list is not empty
             var sortedDesc = restaurants.OrderByDescending(x => x.Name).ToList();
             return sortedDesc;
 
@@ -82,26 +82,35 @@ namespace RReviews.BLL
 
         public static List<Restaurant> GetRestaurantsByLocationCityAscending()
         {
+            //check if list is not empty
             var sortedAsc = restaurants.OrderBy(x => x.City).ToList();
             return sortedAsc;
         }
 
         public static List<Restaurant> GetRestaurantsByLocationCityDescending()
         {
+            //check if list is not empty
             var sortedDesc = restaurants.OrderByDescending(x => x.City).ToList();
             return sortedDesc;
         }
 
         public static List<Restaurant> GetAllRestaurantsByReviewAscending()
         {
+            //check if list is not empty
             var sortedAsc = restaurants.OrderBy(x => x.GetAvgReview()).ToList();
             return sortedAsc;
         }
 
         public static List<Restaurant> GetBestReviewedRestaurantsTop3()
         {
+            //check if list is not empty
             var sorted = GetAllRestaurantsByReviewAscending();
             return sorted.GetRange(0, 3);
+        }
+
+        public static Restaurant GetRestaurantByName(string name)
+        {
+            return restaurants.Find((x=>x.Name.Equals(name)));
         }
     }
 }

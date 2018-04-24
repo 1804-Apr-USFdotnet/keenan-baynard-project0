@@ -92,8 +92,18 @@ namespace RReviewsUnitTest
         [TestMethod]
         public void GetBestReviewedRestaurantsTop3UnitTest()
         {
-            //AddReview()
-            //GetBestReviewedRestaurantsTop3()
+            init();
+            List<Restaurant> expected = new List<Restaurant>
+            {
+                restaurant2,
+                restaurant3,
+                restaurant,
+            };
+
+
+            List<Restaurant> actual = SearchRestaurants.GetBestReviewedRestaurantsTop3();
+
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void GetResturantFullNameUnitTest()

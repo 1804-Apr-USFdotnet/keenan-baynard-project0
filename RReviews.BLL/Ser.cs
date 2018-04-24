@@ -21,5 +21,9 @@ namespace RReviews.BLL
             var objects = JsonConvert.DeserializeObject<List<Restaurant>>(textJson);
             return objects;
         }
+        public static void CreateList()
+        {
+            SearchRestaurants.restaurants = Deserialize();
+        }
     }
 }
