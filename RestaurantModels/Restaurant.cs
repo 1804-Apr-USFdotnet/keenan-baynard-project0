@@ -52,5 +52,13 @@ namespace RestaurantModels
                 "\nFriday: " + fri +
                 "\nSaturday: " + sat;
         }
+
+        public void PrintInfo()
+        {
+            Console.WriteLine($"Restaraunt Name: {Name}");
+            Console.WriteLine($"City: {City}");
+            Console.WriteLine($"State: {State}");
+            Console.WriteLine($"Food Type: {FoodType}");
+        }
     }
 }

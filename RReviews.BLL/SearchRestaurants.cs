@@ -10,31 +10,67 @@ namespace RReviews.BLL
     public static class SearchRestaurants
     {
         public static List<Restaurant> restaurants = new List<Restaurant>();
-        public static string GetResturantFullName(string PartialName)
+        static Tuple<List<Restaurant>, string> GetRestaurantFullName(string PartialName)
         {
             if (PartialName != null && PartialName != "")
             {
-
                 int PartialLength = PartialName.Length;
-                foreach (Restaurant restaurant in restaurants)
+                List<Restaurant> found;
+                try
                 {
-                    if (restaurant.Name.Substring(0, PartialLength).Equals(PartialName))
-                    {
-                        return restaurant.Name;
-                    }
+                    found = restaurants.FindAll((x => x.Name.Substring(0, PartialLength).Equals(PartialName, StringComparison.InvariantCultureIgnoreCase)));
                 }
-                return "Could not find Restaurant matching " + PartialName;
+                catch (ArgumentOutOfRangeException e)
+                {
+                    //log exception
+                    found = new List<Restaurant>();
+                }
+
+                if (found.Count > 0)
+                {
+                    return new Tuple<List<Restaurant>, string>(found, "");
+                }
+                return new Tuple<List<Restaurant>, string>(null, "Could not find Restaurant matching " + PartialName);
             }
             else
             {
-                return "Didnt not Enter a valid name";
+                return new Tuple<List<Restaurant>, string>(null, "Didnt not Enter a valid name");
+            }
+        }
+
+        public static void ReturnGetRestaurantFullName(string PartialName)
+        {
+            List<Restaurant> result = GetRestaurantFullName(PartialName).Item1;
+            string resultString = GetRestaurantFullName(PartialName).Item2;
+            if (restaurants != null)
+            {
+                foreach (var item in result)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
+            else
+            {
+                Console.WriteLine(resultString);
             }
         }
 
         public static List<Restaurant> GetResturantsByNameAscending()
         {
-            var sortedAsc = restaurants.OrderBy(x => x.Name).ToList();
-            return sortedAsc;
+            if (restaurants.Count > 0 && restaurants != null)
+            {
+                var sortedAsc = restaurants.OrderBy(x => x.Name).ToList();
+                return sortedAsc;
+            }
+            else
+            {
+                //empty or null list
+                return restaurants = new List<Restaurant>
+                {
+                    //check when calling SearchRestaurants for empty strings, is they appear there is an error
+                    new Restaurant("","","")
+                };
+            }
         }
 
         public static List<Restaurant> GetResturantsByNameDescending()

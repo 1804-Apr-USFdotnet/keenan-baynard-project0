@@ -18,5 +18,6 @@ namespace RestaurantModels.Interfaces
         void AddReview(Review review);
         double GetAvgReview();
         void SetOperationHours(string sun, string mon, string tue, string wed, string thur, string friday, string sat);
+        void PrintInfo();
     }
 }

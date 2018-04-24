@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestaurantModels;
@@ -24,7 +22,6 @@ namespace RReviewsUnitTest
             //adding reviews
             restaurant.AddReview(new Review
             {
-                ResturuantName = "Fogo De Chao",
                 ReviewComment = "good service, good food. Was very  happy with how the place looked and very clean",
                 ReviewRating = 4.5,
                 ReviewerName = "Keenan Baynard"
@@ -32,7 +29,6 @@ namespace RReviewsUnitTest
             });
             restaurant.AddReview(new Review
             {
-                ResturuantName = "Fogo De Chao",
                 ReviewComment = "terrible, food was aweful, service was slow, and my table was not cleaned",
                 ReviewRating = 0.5,
                 ReviewerName = "Joe Johnson"
@@ -40,25 +36,21 @@ namespace RReviewsUnitTest
             });
             restaurant2.AddReview(new Review
             {
-                ResturuantName = "Wendys",
                 ReviewRating = 1,
 
             });
             restaurant3.AddReview(new Review
             {
-                ResturuantName = "Chipotle",
                 ReviewRating = 2,
 
             });
             restaurant4.AddReview(new Review
             {
-                ResturuantName = "Ritas",
                 ReviewRating = 3,
 
             });
             restaurant5.AddReview(new Review
             {
-                ResturuantName = "Qdoba",
                 ReviewRating = 4,
 
             });

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,12 +45,16 @@
   <ItemGroup>
     <Compile Include="SearchRestaurants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ser.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RestaurantModels\Restaurant.Models.csproj">
       <Project>{a91dcd07-4d65-432a-ac53-a17f31d19490}</Project>
       <Name>Restaurant.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
