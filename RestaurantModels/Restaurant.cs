@@ -43,6 +43,7 @@ namespace RestaurantModels
 
         public void SetOperationHours(string sun, string mon, string tue, string wed, string thur, string fri, string sat)
         {
+            //need to add random opeation hours to json list
             OperationHours =
                 "Sunday: " + sun +
                 "\nMonday: " + mon +

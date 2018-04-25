@@ -25,9 +25,7 @@ namespace RReviews.Client
             //}
 
 
-            //need to add displaying restaurants by rating
-
-
+                            //need to add displaying restaurants by rating
 
 
 
