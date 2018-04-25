@@ -25,7 +25,7 @@ namespace RReviews.Client
             //}
 
 
-                                //need to add displaying restaurants by rating
+            //need to add displaying restaurants by rating
 
 
 
@@ -99,6 +99,7 @@ namespace RReviews.Client
                 Console.WriteLine("Type 'add' to add review to restaurant");
                 Console.WriteLine("Type 'get' to see all reviews for restaurant");
                 Console.WriteLine("Type 'back' to go back");
+                Console.WriteLine("Type 'avg' to get average review");
                 Console.WriteLine("Type 'exit' to exit");
                 string option = Console.ReadLine();
                 switch (option)
@@ -107,13 +108,16 @@ namespace RReviews.Client
                         restaurant.AddReview(Restaurant.CreateReview());
                         break;
                     case "back":
-                        //back
+                        Find(option);
                         break;
                     case "get":
                         foreach (var item in restaurant.Reviews)
                         {
                             Console.WriteLine(item.GetFormattedReview());
                         }
+                        break;
+                    case "avg":
+                        Console.WriteLine("Average Review Rating: " +restaurant.GetAvgReview());
                         break;
                     case "exit":
                         Exit();
@@ -130,5 +134,5 @@ namespace RReviews.Client
             Environment.Exit(0);
         }
     }
-
 }
+

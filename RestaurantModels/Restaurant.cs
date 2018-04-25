@@ -38,7 +38,7 @@ namespace RestaurantModels
         public double GetAvgReview()
         {
             double result = Reviews.Sum(item => item.ReviewRating) / Reviews.Count;
-            return result;
+            return Math.Round(result,2);
         }
 
         public void SetOperationHours(string sun, string mon, string tue, string wed, string thur, string fri, string sat)
