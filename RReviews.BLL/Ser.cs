@@ -10,6 +10,7 @@ namespace RReviews.BLL
 {
     public static class Ser
     {
+        //separate getting string and derserializing
         public static void Serialize()
         {
             string textJson = JsonConvert.SerializeObject(SearchRestaurants.restaurants);

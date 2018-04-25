@@ -60,5 +60,16 @@ namespace RestaurantModels
             Console.WriteLine($"State: {State}");
             Console.WriteLine($"Food Type: {FoodType}");
         }
+        public static Review CreateReview()
+        {
+            Review TempReview = new Review();
+            Console.Write("Enter your full name: ");
+            TempReview.ReviewerName = Console.ReadLine();
+            Console.Write("Enter review score: ");
+            TempReview.ReviewRating =  double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Comment: ");
+            TempReview.ReviewComment = Console.ReadLine();
+            return TempReview;
+        }
     }
 }
