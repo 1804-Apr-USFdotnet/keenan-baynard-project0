@@ -29,6 +29,7 @@ namespace RReviews.Client
 
 
             Start:
+            Console.WriteLine();
             Console.WriteLine("What would you like to do?: ");
             Console.WriteLine("Type 'find' to find restaurant");
             Console.WriteLine("Type 'top' to list top 3 best reviewed restauratns");
@@ -46,53 +47,60 @@ namespace RReviews.Client
                 switch (option)
                 {
                     case "find":
+                        Console.WriteLine();
                         Running.Find();
                         break;
                     case "exit":
                         Running.Exit();
                         break;
                     case "top":
+                        Console.WriteLine();
                         top = SearchRestaurants.GetBestReviewedRestaurantsTop3();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
                         }
-                        break;
+                        goto Start;
                     case "all review":
+                        Console.WriteLine();
                         top = SearchRestaurants.GetAllRestaurantsByReviewDescending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
                         }
-                        break;
+                        goto Start;
                     case "all name asc":
+                        Console.WriteLine();
                         top = SearchRestaurants.GetRestaurantsByNameAscending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
                         }
-                        break;
+                        goto Start;
                     case "all name desc":
+                        Console.WriteLine();
                         top = SearchRestaurants.GetRestaurantsByNameDescending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
                         }
-                        break;
+                        goto Start;
                     case "all city asc":
+                        Console.WriteLine();
                         top = SearchRestaurants.GetRestaurantsByLocationCityAscending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                            Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
                         }
-                        break;
+                        goto Start;
                     case "all city desc":
+                        Console.WriteLine();
                         top = SearchRestaurants.GetRestaurantsByLocationCityDescending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                            Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
                         }
-                        break;
+                        goto Start;
 
                     default:
                         Console.WriteLine("Enter Valid Option");

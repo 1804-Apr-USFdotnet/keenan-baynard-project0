@@ -95,8 +95,8 @@ namespace RReviewsUnitTest
             init();
             List<Restaurant> expected = new List<Restaurant>
             {
-                restaurant2,
-                restaurant3,
+                restaurant5,
+                restaurant4,
                 restaurant,
             };
 
@@ -182,11 +182,11 @@ namespace RReviewsUnitTest
             init();
             List<Restaurant> expected = new List<Restaurant>
             {
-                restaurant2,
-                restaurant3,
-                restaurant,
+                restaurant5,
                 restaurant4,
-                restaurant5
+                restaurant,
+                restaurant3,
+                restaurant2
             };
 
 

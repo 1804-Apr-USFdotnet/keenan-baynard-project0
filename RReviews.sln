@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{434D6C6A-77E0-49B2-970F-A5B6D66AF74A}"
 	ProjectSection(SolutionItems) = preProject
 		MockData.txt = MockData.txt
+		RestaurantsLog.txt = RestaurantsLog.txt
 	EndProjectSection
 EndProject
 Global
