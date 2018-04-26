@@ -60,6 +60,7 @@ namespace RestaurantModels
             Console.WriteLine($"City: {City}");
             Console.WriteLine($"State: {State}");
             Console.WriteLine($"Food Type: {FoodType}");
+            Console.WriteLine($"Hours of Operstion: {OperationHours}");
         }
         public static Review CreateReview()
         {

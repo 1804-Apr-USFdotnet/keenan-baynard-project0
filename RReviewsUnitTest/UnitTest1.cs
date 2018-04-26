@@ -124,7 +124,7 @@ namespace RReviewsUnitTest
             };
 
 
-            List<Restaurant> actual = SearchRestaurants.GetResturantsByNameAscending();
+            List<Restaurant> actual = SearchRestaurants.GetRestaurantsByNameAscending();
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -141,7 +141,7 @@ namespace RReviewsUnitTest
                 restaurant3
             };
 
-            List<Restaurant> actual = SearchRestaurants.GetResturantsByNameDescending();
+            List<Restaurant> actual = SearchRestaurants.GetRestaurantsByNameDescending();
 
             CollectionAssert.AreEqual(expected,actual);
         }
@@ -190,9 +190,19 @@ namespace RReviewsUnitTest
             };
 
 
-            List<Restaurant> actual = SearchRestaurants.GetAllRestaurantsByReviewAscending();
+            List<Restaurant> actual = SearchRestaurants.GetAllRestaurantsByReviewDescending();
 
             CollectionAssert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void jsonSerializeUnitTest()
+        {
+
+        }
+        [TestMethod]
+        public void jsonDeserializeUnitTest()
+        {
+
         }
     }
 }

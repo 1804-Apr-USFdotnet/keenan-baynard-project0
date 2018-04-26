@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestaurantModels;
+using NLog;
 
 namespace RReviews.BLL
 {
     public static class SearchRestaurants
     {
+        private static Logger log = NLog.LogManager.GetCurrentClassLogger();
         public static List<Restaurant> restaurants = new List<Restaurant>();
-        private static Tuple<List<Restaurant>, string> GetRestaurantFullName(string PartialName)
+        public static Tuple<List<Restaurant>, string> GetRestaurantFullName(string PartialName)
         {
             if (PartialName != null && PartialName != "")
             {
@@ -22,7 +24,7 @@ namespace RReviews.BLL
                 }
                 catch (ArgumentOutOfRangeException e)
                 {
-                    //log exception
+                    log.Error($"Entry ({PartialName}) does not exist, " + e.Message);
                     found = new List<Restaurant>();
                 }
 
@@ -32,6 +34,7 @@ namespace RReviews.BLL
                 }
                 return new Tuple<List<Restaurant>, string>(null, "Could not find Restaurant matching " + PartialName);
             }
+            //code is never reached, maybe write so reaches here if entry has numbers
             else
             {
                 return new Tuple<List<Restaurant>, string>(null, "Didnt not Enter a valid name");
@@ -54,7 +57,7 @@ namespace RReviews.BLL
             }
         }
 
-        public static List<Restaurant> GetResturantsByNameAscending()
+        public static List<Restaurant> GetRestaurantsByNameAscending()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -63,54 +66,103 @@ namespace RReviews.BLL
             }
             else
             {
-                //empty or null list
+                log.Error("Restaurants list is either null or empty, searching will not work");
                 return restaurants = new List<Restaurant>
                 {
-                    //check when calling SearchRestaurants for empty strings, is they appear there is an error
                     new Restaurant("","","")
                 };
             }
         }
 
-        public static List<Restaurant> GetResturantsByNameDescending()
+        public static List<Restaurant> GetRestaurantsByNameDescending()
         {
-            //check if list is not empty
-            var sortedDesc = restaurants.OrderByDescending(x => x.Name).ToList();
-            return sortedDesc;
+            if (restaurants.Count > 0 && restaurants != null)
+            {
+                var sortedDesc = restaurants.OrderByDescending(x => x.Name).ToList();
+                return sortedDesc;
+            }
+            else
+            {
+                log.Error("Restaurants list is either null or empty, searching will not work");
+                return restaurants = new List<Restaurant>
+                {
+                    new Restaurant("","","")
+                };
+            }
 
         }
 
         public static List<Restaurant> GetRestaurantsByLocationCityAscending()
         {
-            //check if list is not empty
-            var sortedAsc = restaurants.OrderBy(x => x.City).ToList();
-            return sortedAsc;
+            if (restaurants.Count > 0 && restaurants != null)
+            {
+                var sortedAsc = restaurants.OrderBy(x => x.City).ToList();
+                return sortedAsc;
+            }
+            else
+            {
+                log.Error("Restaurants list is either null or empty, searching will not work");
+                return restaurants = new List<Restaurant>
+                {
+                    new Restaurant("","","")
+                };
+            }
         }
 
         public static List<Restaurant> GetRestaurantsByLocationCityDescending()
         {
-            //check if list is not empty
-            var sortedDesc = restaurants.OrderByDescending(x => x.City).ToList();
-            return sortedDesc;
+            if (restaurants.Count > 0 && restaurants != null)
+            {
+                var sortedDesc = restaurants.OrderByDescending(x => x.City).ToList();
+                return sortedDesc;
+            }
+            else
+            {
+                log.Error("Restaurants list is either null or empty, searching will not work");
+                return restaurants = new List<Restaurant>
+                {
+                    new Restaurant("","","")
+                };
+            }
         }
 
-        public static List<Restaurant> GetAllRestaurantsByReviewAscending()
+        public static List<Restaurant> GetAllRestaurantsByReviewDescending()
         {
-            //check if list is not empty
-            var sortedAsc = restaurants.OrderBy(x => x.GetAvgReview()).ToList();
-            return sortedAsc;
+            if (restaurants.Count > 0 && restaurants != null)
+            {
+                var sortedAsc = restaurants.OrderByDescending(x => x.GetAvgReview()).ToList();
+                return sortedAsc;
+            }
+            else
+            {
+                log.Error("Restaurants list is either null or empty, searching will not work");
+                return restaurants = new List<Restaurant>
+                {
+                    new Restaurant("","","")
+                };
+            }
         }
 
         public static List<Restaurant> GetBestReviewedRestaurantsTop3()
         {
-            //check if list is not empty
-            var sorted = GetAllRestaurantsByReviewAscending();
-            return sorted.GetRange(0, 3);
+            if (restaurants.Count > 0 && restaurants != null)
+            {
+                var sorted = GetAllRestaurantsByReviewDescending();
+                return sorted.GetRange(0, 3);
+            }
+            else
+            {
+                log.Error("Restaurants list is either null or empty, searching will not work");
+                return restaurants = new List<Restaurant>
+                {
+                    new Restaurant("","","")
+                };
+            }
         }
 
-        public static Restaurant GetRestaurantByName(string name)
-        {
-            return restaurants.Find((x=>x.Name.Equals(name)));
-        }
+        //public static Restaurant GetRestaurantByName(string name)
+        //{
+        //    return restaurants.Find((x => x.Name.Equals(name)));
+        //}
     }
 }

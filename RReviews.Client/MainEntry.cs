@@ -25,45 +25,97 @@ namespace RReviews.Client
             //}
 
 
-                            //need to add displaying restaurants by rating
+            //need to add displaying restaurants by rating
 
 
-
+            Start:
             Console.WriteLine("What would you like to do?: ");
-            Console.WriteLine("Type 'help' for What you can do");
             Console.WriteLine("Type 'find' to find restaurant");
+            Console.WriteLine("Type 'top' to list top 3 best reviewed restauratns");
+            Console.WriteLine("Type 'all review' to list all resturants in order of rating");
+            Console.WriteLine("Type 'all city asc' to list all restauratns in order of city ascending");
+            Console.WriteLine("Type 'all city desc' to list all restauratns in order of city descending");
+            Console.WriteLine("Type 'all name asc' to list all restauratns in order of name ascending");
+            Console.WriteLine("Type 'all name desc' to list all restauratns in order of name descending");
             Console.WriteLine("Type 'exit' to exit");
             Console.WriteLine();
             while (true)
             {
+                List<Restaurant> top;
                 string option = Console.ReadLine();
                 switch (option)
                 {
                     case "find":
-                        Running.Find(option);
-                        break;
-                    case "help":
-                        Running.Help();
+                        Running.Find();
                         break;
                     case "exit":
                         Running.Exit();
                         break;
-
-
+                    case "top":
+                        top = SearchRestaurants.GetBestReviewedRestaurantsTop3();
+                        foreach (var item in top)
+                        {
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                        }
+                        break;
+                    case "all review":
+                        top = SearchRestaurants.GetAllRestaurantsByReviewDescending();
+                        foreach (var item in top)
+                        {
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                        }
+                        break;
+                    case "all name asc":
+                        top = SearchRestaurants.GetRestaurantsByNameAscending();
+                        foreach (var item in top)
+                        {
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                        }
+                        break;
+                    case "all name desc":
+                        top = SearchRestaurants.GetRestaurantsByNameDescending();
+                        foreach (var item in top)
+                        {
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                        }
+                        break;
+                    case "all city asc":
+                        top = SearchRestaurants.GetRestaurantsByLocationCityAscending();
+                        foreach (var item in top)
+                        {
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                        }
+                        break;
+                    case "all city desc":
+                        top = SearchRestaurants.GetRestaurantsByLocationCityDescending();
+                        foreach (var item in top)
+                        {
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                        }
+                        break;
 
                     default:
-                        break;
+                        Console.WriteLine("Enter Valid Option");
+                        Console.WriteLine();
+                        goto Start;
                 }
             }
         }
     }
     static class Running
     {
-        internal static void Find(string option)
+        internal static void Find()
         {
+            string option;
             Console.Write("Search for restaurant by full or parital name: ");
             string Search = Console.ReadLine();
             SearchRestaurants.ReturnGetRestaurantFullName(Search);
+            if (SearchRestaurants.GetRestaurantFullName(Search).Item1==null)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Make sure search is a name, or try shortening the search");
+                Find();
+            }
             Console.WriteLine();
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("Type 'select' and then Restaurant name to select it ");
@@ -77,27 +129,34 @@ namespace RReviews.Client
                 }
             }
         }
-        internal static void Help()
-        {
-            Console.WriteLine("Type 'help' for What you can do");
-            Console.WriteLine("Type 'find' to find restaurant");
-            Console.WriteLine("Type 'exit' to exit");
-        }
+
         internal static void Select(string selected)
         {
             Console.WriteLine("Selected: " + selected);
             Restaurant restaurant = SearchRestaurants.restaurants.Find((x => x.Name.Equals(selected, StringComparison.InvariantCultureIgnoreCase)));
-            AddReview(restaurant);
+            if (restaurant == null)
+            {
+
+                Console.WriteLine();
+                Console.WriteLine("Please enter correct restaurant name");
+                Find();
+            }
+            else
+            {
+                AddReview(restaurant);
+            }
         }
         internal static void AddReview(Restaurant restaurant)
         {
             while (true)
             {
+                //check if entry is a valid restaurant name
                 Console.WriteLine();
                 Console.WriteLine("Type 'add' to add review to restaurant");
                 Console.WriteLine("Type 'get' to see all reviews for restaurant");
-                Console.WriteLine("Type 'back' to go back");
                 Console.WriteLine("Type 'avg' to get average review");
+                Console.WriteLine("Type 'info' for restaurant info");
+                Console.WriteLine("Type 'back' to go back");
                 Console.WriteLine("Type 'exit' to exit");
                 string option = Console.ReadLine();
                 switch (option)
@@ -106,7 +165,7 @@ namespace RReviews.Client
                         restaurant.AddReview(Restaurant.CreateReview());
                         break;
                     case "back":
-                        Find(option);
+                        Find();
                         break;
                     case "get":
                         foreach (var item in restaurant.Reviews)
@@ -115,7 +174,12 @@ namespace RReviews.Client
                         }
                         break;
                     case "avg":
-                        Console.WriteLine("Average Review Rating: " +restaurant.GetAvgReview());
+                        Console.WriteLine();
+                        Console.WriteLine("Average Review Rating: " + restaurant.GetAvgReview());
+                        break;
+                    case "info":
+                        Console.WriteLine();
+                        restaurant.PrintInfo();
                         break;
                     case "exit":
                         Exit();
@@ -128,7 +192,7 @@ namespace RReviews.Client
         }
         internal static void Exit()
         {
-            Ser.Serialize();
+            Ser.Serialize(SearchRestaurants.restaurants);
             Environment.Exit(0);
         }
     }

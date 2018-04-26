@@ -1,0 +1,20 @@
+2018-04-25 20:54:04.2764|ERROR|RReviews.BLL.SearchRestaurants|Entry (asv2e) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:04.3049|ERROR|RReviews.BLL.SearchRestaurants|Entry (asv2e) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:05.4104|ERROR|RReviews.BLL.SearchRestaurants|Entry (ascv231) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:05.4104|ERROR|RReviews.BLL.SearchRestaurants|Entry (ascv231) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:06.6980|ERROR|RReviews.BLL.SearchRestaurants|Entry (sfb3rgw3) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:06.6980|ERROR|RReviews.BLL.SearchRestaurants|Entry (sfb3rgw3) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:08.2519|ERROR|RReviews.BLL.SearchRestaurants|Entry (webwrb) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:08.2519|ERROR|RReviews.BLL.SearchRestaurants|Entry (webwrb) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:09.1351|ERROR|RReviews.BLL.SearchRestaurants|Entry (234523) does not exist, Index and length must refer to a location within the string.
+Parameter name: length
+2018-04-25 20:54:09.1351|ERROR|RReviews.BLL.SearchRestaurants|Entry (234523) does not exist, Index and length must refer to a location within the string.
+Parameter name: length

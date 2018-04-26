@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,20 +12,19 @@ namespace RReviews.BLL
     public static class Ser
     {
         //separate getting string and derserializing
-        public static void Serialize()
+        public static void Serialize(object obj)
         {
-            string textJson = JsonConvert.SerializeObject(SearchRestaurants.restaurants);
-            System.IO.File.WriteAllText(@"D:\Users\ksbay\Documents\Revature\keenan-baynard-project0\MockData.txt",textJson);
+            string textJson = JsonConvert.SerializeObject(obj);
+            System.IO.File.WriteAllText(ConfigurationManager.AppSettings["jsonPath"], textJson);
         }
-        public static List<Restaurant> Deserialize()
+        public static List<Restaurant> Deserialize(string json)
         {
-            string textJson = System.IO.File.ReadAllText(@"D:\Users\ksbay\Documents\Revature\keenan-baynard-project0\MockData.txt");
-            var objects = JsonConvert.DeserializeObject<List<Restaurant>>(textJson);
+            var objects = JsonConvert.DeserializeObject<List<Restaurant>>(json);
             return objects;
         }
         public static void CreateList()
         {
-            SearchRestaurants.restaurants = Deserialize();
+            SearchRestaurants.restaurants = Deserialize(System.IO.File.ReadAllText(ConfigurationManager.AppSettings["jsonPath"]));
         }
     }
 }
