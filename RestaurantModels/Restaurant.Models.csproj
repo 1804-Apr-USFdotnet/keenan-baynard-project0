@@ -50,9 +50,9 @@
   <ItemGroup>
     <Compile Include="Interfaces\IRestaurant.cs" />
     <Compile Include="Interfaces\IReview.cs" />
-    <Compile Include="Restaurant.cs" />
+    <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Review.cs" />
+    <Compile Include="Models\Review.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config" />
