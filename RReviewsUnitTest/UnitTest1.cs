@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestaurantModels;
 using RReviews.BLL;
-using RReviews.DAL;
 
 namespace RReviewsUnitTest
 {
