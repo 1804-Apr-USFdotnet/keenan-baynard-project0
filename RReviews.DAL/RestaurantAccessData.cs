@@ -213,7 +213,8 @@ namespace RReviews.DAL
                 ReviewerName = libModel.ReviewerName,
                 ReviewerComment = libModel.ReviewComment,
                 ReviewerRating = libModel.ReviewRating,
-                RestaurantID = libModel.RestaurantID
+                RestaurantID = libModel.RestaurantID,
+                DateSubmitted= libModel.DateSubmitted
             };
             return dataModel;
         }
