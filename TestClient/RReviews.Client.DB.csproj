@@ -77,14 +77,6 @@
       <Project>{5bd36d15-81b0-4540-b2a0-0d300ae1721e}</Project>
       <Name>RReviews.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RReviews.Client\RReviews.Client.csproj">
-      <Project>{2524825d-c971-4c4a-aa78-399fb1085d62}</Project>
-      <Name>RReviews.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RReviews.DAL\RReviews.DAL.csproj">
-      <Project>{943804e8-17db-4f35-a033-0e4cdf8eb453}</Project>
-      <Name>RReviews.DAL</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

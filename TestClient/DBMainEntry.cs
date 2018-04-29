@@ -11,7 +11,6 @@ namespace TestClient
 {
     class DBMainEntry
     {
-
         static void Main(string[] args)
         {
             Logger log = LogManager.GetCurrentClassLogger();
@@ -30,7 +29,7 @@ namespace TestClient
             while (true)
             {
                 IEnumerable<Restaurant> top;
-                IEnumerable<RReviews.DAL.Restaurant> top2;
+                //IEnumerable<RReviews.DAL.Restaurant> top2;
                 string option = Console.ReadLine();
                 switch (option)
                 {
@@ -43,18 +42,18 @@ namespace TestClient
                         break;
                     case "top":
                         Console.WriteLine();
-                        top2 = RestaurantAccessLibrary.GetBestReviewedRestaurantsTop3();
-                        foreach (var item in top2)
+                        top = RestaurantAccessLibrary.GetBestReviewedRestaurantsTop3();
+                        foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.getAvgReview());
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetReviewsByRestaurantID(item.ID).Average(x => x.ReviewRating));
                         }
                         goto Start;
                     case "all review":
                         Console.WriteLine();
-                        top2 = RestaurantAccessLibrary.GetAllRestaurantsByReviewDescending();
-                        foreach (var item in top2)
+                        top = RestaurantAccessLibrary.GetAllRestaurantsByReviewDescending();
+                        foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.getAvgReview());
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetReviewsByRestaurantID(item.ID).Average(x => x.ReviewRating));
                         }
                         goto Start;
                     case "all name asc":

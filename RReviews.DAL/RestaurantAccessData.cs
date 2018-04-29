@@ -12,181 +12,224 @@ namespace RReviews.DAL
     public static class RestaurantAccessData
     {
         private static Logger log = LogManager.GetCurrentClassLogger();
-        private static RReviewsEntities db = new RReviewsEntities();
+        //private static RReviewsEntities db = new RReviewsEntities();
 
 
         public static IEnumerable<Restaurant> ShowRestaurants()
         {
-            return db.Restaurants.ToList();
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                return db.Restaurants.ToList();
+            }
         }
 
         public static void AddNewRestaurnt(RestaurantModels.Restaurant restaurant)
         {
-            db.Restaurants.Add(LibraryToData(restaurant));
-            db.SaveChanges();
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                db.Restaurants.Add(LibraryToData(restaurant));
+                db.SaveChanges();
+            }
         }
 
 
         public static void AddNewReview(RestaurantModels.Review review)
         {
-            db.Reviews.Add(LibraryToData(review));
-            db.SaveChanges();
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                db.Reviews.Add(LibraryToData(review));
+                db.SaveChanges();
+            }
         }
 
         public static RestaurantModels.Restaurant GetRestaurantByID(int ID)
         {
-            return DataToLibraryRestaurant(db.Restaurants.ToList().Find((x => x.ID.Equals(ID))));
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                return DataToLibraryRestaurant(db.Restaurants.ToList().Find((x => x.ID.Equals(ID))));
+            }
         }
 
         public static RestaurantModels.Restaurant GetRestaurantByName(string name)
         {
-            return DataToLibraryRestaurant(db.Restaurants.ToList().Find((x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))));
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                return DataToLibraryRestaurant(db.Restaurants.ToList().Find((x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))));
+            }
         }
 
         public static IEnumerable<RestaurantModels.Review> GetReviewsByRestaurantID(int id)
         {
-            var dataList = db.Reviews.ToList();
-            var data2 = dataList.FindAll((x => x.RestaurantID.Equals(id)));
-            return data2.Select((x => DataToLibraryReview(x)));
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                var dataList = db.Reviews.ToList();
+                var data2 = dataList.FindAll((x => x.RestaurantID.Equals(id)));
+                return data2.Select((x => DataToLibraryReview(x)));
+            }
         }
 
         public static double GetAvgReview(RestaurantModels.Restaurant restaurant)
         {
-            var reviews = db.Reviews.ToList();
-            var lreviews = reviews.FindAll((x => x.RestaurantID.Equals(restaurant.ID)));
-            return Math.Round(lreviews.Select(x => x.ReviewerRating).Average(), 2);
+            using (RReviewsEntities db = new RReviewsEntities())
+            {
+                var reviews = db.Reviews.ToList();
+                var lreviews = reviews.FindAll((x => x.RestaurantID.Equals(restaurant.ID)));
+                return Math.Round(lreviews.Select(x => x.ReviewerRating).Average(), 2);
+            }
         }
 
         public static Tuple<IEnumerable<RestaurantModels.Restaurant>, string> GetRestaurantFullName(string PartialName)
         {
-            if (PartialName != null && PartialName != "")
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                int PartialLength = PartialName.Length;
-                IEnumerable<RestaurantModels.Restaurant> found;
-                try
+                if (PartialName != null && PartialName != "")
                 {
-                    var dataList = db.Restaurants.ToList();
-                    var data2 = dataList.FindAll((x => x.Name.Substring(0, PartialLength).Equals(PartialName, StringComparison.InvariantCultureIgnoreCase)));
-                    found = data2.Select((x => DataToLibraryRestaurant(x)));
-                }
-                catch (ArgumentOutOfRangeException e)
-                {
-                    log.Error($"Entry ({PartialName}) does not exist, " + e.Message);
-                    found = new List<RestaurantModels.Restaurant>();
-                }
+                    int PartialLength = PartialName.Length;
+                    IEnumerable<RestaurantModels.Restaurant> found;
+                    try
+                    {
+                        var dataList = db.Restaurants.ToList();
+                        var data2 = dataList.FindAll((x => x.Name.Substring(0, PartialLength).Equals(PartialName, StringComparison.InvariantCultureIgnoreCase)));
+                        found = data2.Select((x => DataToLibraryRestaurant(x)));
+                    }
+                    catch (ArgumentOutOfRangeException e)
+                    {
+                        log.Error($"Entry ({PartialName}) does not exist, " + e.Message);
+                        found = new List<RestaurantModels.Restaurant>();
+                    }
 
-                if (found.Any())
-                {
-                    return new Tuple<IEnumerable<RestaurantModels.Restaurant>, string>(found, "");
+                    if (found.Any())
+                    {
+                        return new Tuple<IEnumerable<RestaurantModels.Restaurant>, string>(found, "");
+                    }
+                    return new Tuple<IEnumerable<RestaurantModels.Restaurant>, string>(null, "Could not find Restaurant matching " + PartialName);
                 }
-                return new Tuple<IEnumerable<RestaurantModels.Restaurant>, string>(null, "Could not find Restaurant matching " + PartialName);
-            }
-            //code is never reached, maybe write so reaches here if entry has numbers
-            else
-            {
-                return new Tuple<IEnumerable<RestaurantModels.Restaurant>, string>(null, "Didnt not Enter a valid name");
+                //code is never reached, maybe write so reaches here if entry has numbers
+                else
+                {
+                    return new Tuple<IEnumerable<RestaurantModels.Restaurant>, string>(null, "Didnt not Enter a valid name");
+                }
             }
         }
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByNameAscending()
         {
-            if (db.Restaurants.Any())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                var sortedAsc = db.Restaurants.OrderBy(x => x.Name).ToList();
-                return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
-            }
-            else
-            {
-                log.Error("DB does not contain any restaurants");
-                return new List<RestaurantModels.Restaurant>
+                if (db.Restaurants.Any())
+                {
+                    var sortedAsc = db.Restaurants.OrderBy(x => x.Name).ToList();
+                    return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
+                }
+                else
+                {
+                    log.Error("DB does not contain any restaurants");
+                    return new List<RestaurantModels.Restaurant>
                 {
                     new RestaurantModels.Restaurant("","","")
                 };
+                }
             }
         }
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByNameDescending()
         {
-            if (db.Restaurants.Any())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                var sortedAsc = db.Restaurants.OrderByDescending(x => x.Name).ToList();
-                return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
-            }
-            else
-            {
-                log.Error("DB does not contain any restaurants");
-                return new List<RestaurantModels.Restaurant>
+                if (db.Restaurants.Any())
+                {
+                    var sortedAsc = db.Restaurants.OrderByDescending(x => x.Name).ToList();
+                    return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
+                }
+                else
+                {
+                    log.Error("DB does not contain any restaurants");
+                    return new List<RestaurantModels.Restaurant>
                 {
                     new RestaurantModels.Restaurant("","","")
                 };
+                }
             }
         }
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByLocationCityAscending()
         {
-            if (db.Restaurants.Any())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                var sortedAsc = db.Restaurants.OrderBy(x => x.City).ToList();
-                return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
-            }
-            else
-            {
-                log.Error("DB does not contain any restaurants");
-                return new List<RestaurantModels.Restaurant>
+                if (db.Restaurants.Any())
+                {
+                    var sortedAsc = db.Restaurants.OrderBy(x => x.City).ToList();
+                    return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
+                }
+                else
+                {
+                    log.Error("DB does not contain any restaurants");
+                    return new List<RestaurantModels.Restaurant>
                 {
                     new RestaurantModels.Restaurant("","","")
                 };
+                }
             }
         }
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByLocationCityDescending()
         {
-            if (db.Restaurants.Any())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                var sortedAsc = db.Restaurants.OrderByDescending(x => x.City).ToList();
-                return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
-            }
-            else
-            {
-                log.Error("DB does not contain any restaurants");
-                return new List<RestaurantModels.Restaurant>
+                if (db.Restaurants.Any())
+                {
+                    var sortedAsc = db.Restaurants.OrderByDescending(x => x.City).ToList();
+                    return sortedAsc.Select((x => DataToLibraryRestaurant(x)));
+                }
+                else
+                {
+                    log.Error("DB does not contain any restaurants");
+                    return new List<RestaurantModels.Restaurant>
                 {
                     new RestaurantModels.Restaurant("","","")
                 };
+                }
             }
         }
 
-        public static IEnumerable<Restaurant> GetAllRestaurantsByReviewDescending()
+        public static IEnumerable<RestaurantModels.Restaurant> GetAllRestaurantsByReviewDescending()
         {
-            if (db.Restaurants.Any())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                var restaurants = db.Restaurants.ToList();
-                return restaurants.OrderByDescending(x => x.getAvgReview());
-            }
-            else
-            {
-                log.Error("DB does not contain any restaurants");
-                return new List<Restaurant>
+                if (db.Restaurants.Any())
                 {
-                    new Restaurant()
+                    var restaurants = db.Restaurants.ToList();
+                    var rest =  restaurants.OrderByDescending(x => x.getAvgReview());
+                    return rest.Select(x => DataToLibraryRestaurant(x));
+                }
+                else
+                {
+                    log.Error("DB does not contain any restaurants");
+                    return new List<RestaurantModels.Restaurant>
+                {
+                    new RestaurantModels.Restaurant("","","")
                 };
+                }
             }
         }
 
-        public static IEnumerable<Restaurant> GetBestReviewedRestaurantsTop3()
+        public static IEnumerable<RestaurantModels.Restaurant> GetBestReviewedRestaurantsTop3()
         {
-            if (db.Restaurants.Any())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
-                var sorted = GetAllRestaurantsByReviewDescending();
-                return sorted.ToList().GetRange(0, 3);
-            }
-            else
-            {
-                log.Error("DB does not contain any restaurants");
-                return new List<Restaurant>
+                if (db.Restaurants.Any())
                 {
-                    new Restaurant()
+                    var sorted = GetAllRestaurantsByReviewDescending();
+                    return sorted.ToList().GetRange(0, 3);
+                }
+                else
+                {
+                    log.Error("DB does not contain any restaurants");
+                    return new List<RestaurantModels.Restaurant>
+                {
+                    new RestaurantModels.Restaurant("","","")
                 };
+                }
             }
         }
 
