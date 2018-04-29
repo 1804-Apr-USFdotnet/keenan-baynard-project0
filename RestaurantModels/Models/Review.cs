@@ -11,6 +11,8 @@ namespace RestaurantModels
         public string ReviewerName { get; set; }
         public string ReviewComment { get; set; }
         public double ReviewRating { get; set; }
+        public int RestaurantID { get; set; }
+
 
         public DateTime DateSubmitted => DateTime.Now;
 

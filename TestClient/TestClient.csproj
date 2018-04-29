@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{943804E8-17DB-4F35-A033-0E4CDF8EB453}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RReviews.DAL</RootNamespace>
-    <AssemblyName>RReviews.DAL</AssemblyName>
+    <ProjectGuid>{2530D86D-5CAB-4C9A-B0F7-F27737E32DCC}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TestClient</RootNamespace>
+    <AssemblyName>TestClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -36,18 +38,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.5.3\lib\net45\NLog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,67 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Restaurant.cs">
-      <DependentUpon>RReviewsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Review.cs">
-      <DependentUpon>RReviewsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RReviewsModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RReviewsModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RReviewsModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RReviewsModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RReviewsModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RReviewsModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="RestaurantAccess.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>RReviewsModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="NLog.config" />
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
-    <EntityDeploy Include="RReviewsModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RReviewsModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="RReviewsModel.edmx.diagram">
-      <DependentUpon>RReviewsModel.edmx</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="RReviewsModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RReviewsModel.edmx</DependentUpon>
-      <LastGenOutput>RReviewsModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="RReviewsModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RReviewsModel.edmx</DependentUpon>
-      <LastGenOutput>RReviewsModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RestaurantModels\Restaurant.Models.csproj">
       <Project>{a91dcd07-4d65-432a-ac53-a17f31d19490}</Project>
       <Name>Restaurant.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RReviews.BLL\RReviews.BLL.csproj">
+      <Project>{5bd36d15-81b0-4540-b2a0-0d300ae1721e}</Project>
+      <Name>RReviews.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RReviews.Client\RReviews.Client.csproj">
+      <Project>{2524825d-c971-4c4a-aa78-399fb1085d62}</Project>
+      <Name>RReviews.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RReviews.DAL\RReviews.DAL.csproj">
+      <Project>{943804e8-17db-4f35-a033-0e4cdf8eb453}</Project>
+      <Name>RReviews.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

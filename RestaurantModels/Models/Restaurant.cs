@@ -9,12 +9,13 @@ namespace RestaurantModels
 {
     public class Restaurant : IRestaurant
     {
+        public int ID { get; set; }
         public string City { get; private set; }
         public string State { get; private set; }
         public string Name { get; private set; }
         public List<Review> Reviews { get; private set; }
         public string FoodType { get; set; }
-        public string OperationHours { get; private set; }
+        public string OperationHours { get; set; }
         
 
         public Restaurant(string name, string city, string state)

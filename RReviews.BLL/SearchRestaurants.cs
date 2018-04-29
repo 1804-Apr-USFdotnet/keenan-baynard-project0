@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RestaurantModels;
+using RReviews.DAL;
 using NLog;
 
 namespace RReviews.BLL
@@ -11,13 +12,13 @@ namespace RReviews.BLL
     public static class SearchRestaurants
     {
         private static Logger log = NLog.LogManager.GetCurrentClassLogger();
-        public static List<Restaurant> restaurants = new List<Restaurant>();
-        public static Tuple<List<Restaurant>, string> GetRestaurantFullName(string PartialName)
+        public static List<RestaurantModels.Restaurant> restaurants = new List<RestaurantModels.Restaurant>();
+        public static Tuple<List<RestaurantModels.Restaurant>, string> GetRestaurantFullName(string PartialName)
         {
             if (PartialName != null && PartialName != "")
             {
                 int PartialLength = PartialName.Length;
-                List<Restaurant> found;
+                List<RestaurantModels.Restaurant> found;
                 try
                 {
                     found = restaurants.FindAll((x => x.Name.Substring(0, PartialLength).Equals(PartialName, StringComparison.InvariantCultureIgnoreCase)));
@@ -25,25 +26,25 @@ namespace RReviews.BLL
                 catch (ArgumentOutOfRangeException e)
                 {
                     log.Error($"Entry ({PartialName}) does not exist, " + e.Message);
-                    found = new List<Restaurant>();
+                    found = new List<RestaurantModels.Restaurant>();
                 }
 
                 if (found.Count > 0)
                 {
-                    return new Tuple<List<Restaurant>, string>(found, "");
+                    return new Tuple<List<RestaurantModels.Restaurant>, string>(found, "");
                 }
-                return new Tuple<List<Restaurant>, string>(null, "Could not find Restaurant matching " + PartialName);
+                return new Tuple<List<RestaurantModels.Restaurant>, string>(null, "Could not find Restaurant matching " + PartialName);
             }
             //code is never reached, maybe write so reaches here if entry has numbers
             else
             {
-                return new Tuple<List<Restaurant>, string>(null, "Didnt not Enter a valid name");
+                return new Tuple<List<RestaurantModels.Restaurant>, string>(null, "Didnt not Enter a valid name");
             }
         }
 
         public static void ReturnGetRestaurantFullName(string PartialName)
         {
-            Tuple<List<Restaurant>, string> result = GetRestaurantFullName(PartialName);
+            Tuple<List<RestaurantModels.Restaurant>, string> result = GetRestaurantFullName(PartialName);
             if (restaurants != null && result.Item1 != null)
             {
                 foreach (var item in result.Item1)
@@ -57,7 +58,7 @@ namespace RReviews.BLL
             }
         }
 
-        public static List<Restaurant> GetRestaurantsByNameAscending()
+        public static List<RestaurantModels.Restaurant> GetRestaurantsByNameAscending()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -67,14 +68,14 @@ namespace RReviews.BLL
             else
             {
                 log.Error("Restaurants list is either null or empty, searching will not work");
-                return restaurants = new List<Restaurant>
+                return restaurants = new List<RestaurantModels.Restaurant>
                 {
-                    new Restaurant("","","")
+                    new RestaurantModels.Restaurant("","","")
                 };
             }
         }
 
-        public static List<Restaurant> GetRestaurantsByNameDescending()
+        public static List<RestaurantModels.Restaurant> GetRestaurantsByNameDescending()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -84,15 +85,15 @@ namespace RReviews.BLL
             else
             {
                 log.Error("Restaurants list is either null or empty, searching will not work");
-                return restaurants = new List<Restaurant>
+                return restaurants = new List<RestaurantModels.Restaurant>
                 {
-                    new Restaurant("","","")
+                    new RestaurantModels.Restaurant("","","")
                 };
             }
 
         }
 
-        public static List<Restaurant> GetRestaurantsByLocationCityAscending()
+        public static List<RestaurantModels.Restaurant> GetRestaurantsByLocationCityAscending()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -102,14 +103,14 @@ namespace RReviews.BLL
             else
             {
                 log.Error("Restaurants list is either null or empty, searching will not work");
-                return restaurants = new List<Restaurant>
+                return restaurants = new List<RestaurantModels.Restaurant>
                 {
-                    new Restaurant("","","")
+                    new RestaurantModels.Restaurant("","","")
                 };
             }
         }
 
-        public static List<Restaurant> GetRestaurantsByLocationCityDescending()
+        public static List<RestaurantModels.Restaurant> GetRestaurantsByLocationCityDescending()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -119,14 +120,14 @@ namespace RReviews.BLL
             else
             {
                 log.Error("Restaurants list is either null or empty, searching will not work");
-                return restaurants = new List<Restaurant>
+                return restaurants = new List<RestaurantModels.Restaurant>
                 {
-                    new Restaurant("","","")
+                    new RestaurantModels.Restaurant("","","")
                 };
             }
         }
 
-        public static List<Restaurant> GetAllRestaurantsByReviewDescending()
+        public static List<RestaurantModels.Restaurant> GetAllRestaurantsByReviewDescending()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -136,14 +137,14 @@ namespace RReviews.BLL
             else
             {
                 log.Error("Restaurants list is either null or empty, searching will not work");
-                return restaurants = new List<Restaurant>
+                return restaurants = new List<RestaurantModels.Restaurant>
                 {
-                    new Restaurant("","","")
+                    new RestaurantModels.Restaurant("","","")
                 };
             }
         }
 
-        public static List<Restaurant> GetBestReviewedRestaurantsTop3()
+        public static List<RestaurantModels.Restaurant> GetBestReviewedRestaurantsTop3()
         {
             if (restaurants.Count > 0 && restaurants != null)
             {
@@ -153,9 +154,9 @@ namespace RReviews.BLL
             else
             {
                 log.Error("Restaurants list is either null or empty, searching will not work");
-                return restaurants = new List<Restaurant>
+                return restaurants = new List<RestaurantModels.Restaurant>
                 {
-                    new Restaurant("","","")
+                    new RestaurantModels.Restaurant("","","")
                 };
             }
         }

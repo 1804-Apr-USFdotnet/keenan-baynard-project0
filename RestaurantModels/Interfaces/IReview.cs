@@ -13,5 +13,7 @@ namespace RestaurantModels.Interfaces
         string ReviewComment { get; set; }
         DateTime DateSubmitted { get; }
         string GetFormattedReview();
+        int RestaurantID { get; set; }
+
     }
 }
