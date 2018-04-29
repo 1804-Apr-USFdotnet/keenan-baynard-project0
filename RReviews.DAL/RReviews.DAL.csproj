@@ -78,7 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RReviewsModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="RestaurantAccess.cs" />
+    <Compile Include="RestaurantAccessData.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>RReviewsModel.tt</DependentUpon>
     </Compile>

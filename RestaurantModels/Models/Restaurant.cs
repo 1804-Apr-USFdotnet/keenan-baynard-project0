@@ -16,7 +16,7 @@ namespace RestaurantModels
         public List<Review> Reviews { get; private set; }
         public string FoodType { get; set; }
         public string OperationHours { get; set; }
-        
+
 
         public Restaurant(string name, string city, string state)
         {
@@ -39,7 +39,7 @@ namespace RestaurantModels
         public double GetAvgReview()
         {
             double result = Reviews.Sum(item => item.ReviewRating) / Reviews.Count;
-            return Math.Round(result,2);
+            return Math.Round(result, 2);
         }
 
         public void SetOperationHours(string sun, string mon, string tue, string wed, string thur, string fri, string sat)
@@ -63,13 +63,27 @@ namespace RestaurantModels
             Console.WriteLine($"Food Type: {FoodType}");
             Console.WriteLine($"Hours of Operstion: {OperationHours}");
         }
+
         public static Review CreateReview()
         {
             Review TempReview = new Review();
             Console.Write("Enter your full name: ");
             TempReview.ReviewerName = Console.ReadLine();
             Console.Write("Enter review score: ");
-            TempReview.ReviewRating =  double.Parse(Console.ReadLine());
+            TempReview.ReviewRating = double.Parse(Console.ReadLine());
+            Console.WriteLine("Enter Comment: ");
+            TempReview.ReviewComment = Console.ReadLine();
+            return TempReview;
+        }
+
+        public static Review CreateReview(Restaurant restaurant)
+        {
+            Review TempReview = new Review();
+            TempReview.RestaurantID = restaurant.ID;
+            Console.Write("Enter your full name: ");
+            TempReview.ReviewerName = Console.ReadLine();
+            Console.Write("Enter review score: ");
+            TempReview.ReviewRating = double.Parse(Console.ReadLine());
             Console.WriteLine("Enter Comment: ");
             TempReview.ReviewComment = Console.ReadLine();
             return TempReview;

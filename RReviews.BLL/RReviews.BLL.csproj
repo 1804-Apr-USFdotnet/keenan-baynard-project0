@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RestaurantAccessLibrary.cs" />
     <Compile Include="SearchRestaurants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ser.cs" />

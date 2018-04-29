@@ -11,6 +11,7 @@ namespace RReviews.DAL
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     
     public partial class Restaurant
     {
@@ -29,5 +30,16 @@ namespace RReviews.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
+
+        public double getAvgReview()
+        {
+            using(RReviewsEntities db = new RReviewsEntities())
+            {
+                var reviews = db.Reviews.ToList();
+                var lreviews = reviews.FindAll((x => x.RestaurantID.Equals(ID)));
+                Console.WriteLine("Getting another avg");
+                return lreviews.Select(x => x.ReviewerRating).Average();
+            }
+        }
     }
 }
