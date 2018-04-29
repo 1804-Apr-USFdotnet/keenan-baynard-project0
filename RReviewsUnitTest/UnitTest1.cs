@@ -55,11 +55,11 @@ namespace RReviewsUnitTest
             });
 
             //adding restautants to list
-            SearchRestaurants.restaurants.Add(restaurant);
-            SearchRestaurants.restaurants.Add(restaurant2);
-            SearchRestaurants.restaurants.Add(restaurant3);
-            SearchRestaurants.restaurants.Add(restaurant4);
-            SearchRestaurants.restaurants.Add(restaurant5);
+            SearchRestaurantsSer.restaurants.Add(restaurant);
+            SearchRestaurantsSer.restaurants.Add(restaurant2);
+            SearchRestaurantsSer.restaurants.Add(restaurant3);
+            SearchRestaurantsSer.restaurants.Add(restaurant4);
+            SearchRestaurantsSer.restaurants.Add(restaurant5);
         }
         [TestMethod]
         public void GetRestaurantLocationUnitTest()
@@ -100,7 +100,7 @@ namespace RReviewsUnitTest
             };
 
 
-            List<Restaurant> actual = SearchRestaurants.GetBestReviewedRestaurantsTop3();
+            List<Restaurant> actual = SearchRestaurantsSer.GetBestReviewedRestaurantsTop3();
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -123,7 +123,7 @@ namespace RReviewsUnitTest
             };
 
 
-            List<Restaurant> actual = SearchRestaurants.GetRestaurantsByNameAscending();
+            List<Restaurant> actual = SearchRestaurantsSer.GetRestaurantsByNameAscending();
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -140,7 +140,7 @@ namespace RReviewsUnitTest
                 restaurant3
             };
 
-            List<Restaurant> actual = SearchRestaurants.GetRestaurantsByNameDescending();
+            List<Restaurant> actual = SearchRestaurantsSer.GetRestaurantsByNameDescending();
 
             CollectionAssert.AreEqual(expected,actual);
         }
@@ -157,7 +157,7 @@ namespace RReviewsUnitTest
                 restaurant5
             };
 
-            List<Restaurant> actual = SearchRestaurants.GetRestaurantsByLocationCityAscending();
+            List<Restaurant> actual = SearchRestaurantsSer.GetRestaurantsByLocationCityAscending();
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -189,7 +189,7 @@ namespace RReviewsUnitTest
             };
 
 
-            List<Restaurant> actual = SearchRestaurants.GetAllRestaurantsByReviewDescending();
+            List<Restaurant> actual = SearchRestaurantsSer.GetAllRestaurantsByReviewDescending();
 
             CollectionAssert.AreEqual(expected, actual);
         }
