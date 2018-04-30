@@ -69,9 +69,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestaurantModels\Restaurant.Models.csproj">
+    <ProjectReference Include="..\RestaurantModels\RReviews.Models.csproj">
       <Project>{a91dcd07-4d65-432a-ac53-a17f31d19490}</Project>
-      <Name>Restaurant.Models</Name>
+      <Name>RReviews.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\RReviews.BLL\RReviews.BLL.csproj">
       <Project>{5bd36d15-81b0-4540-b2a0-0d300ae1721e}</Project>
