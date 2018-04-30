@@ -12,12 +12,12 @@ namespace RReviews.DAL
     public static class RestaurantAccessData
     {
         private static Logger log = LogManager.GetCurrentClassLogger();
-        //private static RReviewsEntities db = new RReviewsEntities();
+        private static RReviewsEntities db = new RReviewsEntities();
 
 
         public static IEnumerable<Restaurant> ShowRestaurants()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 return db.Restaurants.ToList();
             }
@@ -25,7 +25,7 @@ namespace RReviews.DAL
 
         public static void AddNewRestaurnt(RestaurantModels.Restaurant restaurant)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 db.Restaurants.Add(LibraryToData(restaurant));
                 db.SaveChanges();
@@ -35,7 +35,7 @@ namespace RReviews.DAL
 
         public static void AddNewReview(RestaurantModels.Review review)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 db.Reviews.Add(LibraryToData(review));
                 db.SaveChanges();
@@ -44,7 +44,7 @@ namespace RReviews.DAL
 
         public static RestaurantModels.Restaurant GetRestaurantByID(int ID)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 return DataToLibraryRestaurant(db.Restaurants.ToList().Find((x => x.ID.Equals(ID))));
             }
@@ -52,7 +52,7 @@ namespace RReviews.DAL
 
         public static RestaurantModels.Restaurant GetRestaurantByName(string name)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 return DataToLibraryRestaurant(db.Restaurants.ToList().Find((x => x.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))));
             }
@@ -60,7 +60,7 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Review> GetReviewsByRestaurantID(int id)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 var dataList = db.Reviews.ToList();
                 var data2 = dataList.FindAll((x => x.RestaurantID.Equals(id)));
@@ -70,7 +70,7 @@ namespace RReviews.DAL
 
         public static double GetAvgReview(RestaurantModels.Restaurant restaurant)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 var reviews = db.Reviews.ToList();
                 var lreviews = reviews.FindAll((x => x.RestaurantID.Equals(restaurant.ID)));
@@ -80,7 +80,7 @@ namespace RReviews.DAL
 
         public static Tuple<IEnumerable<RestaurantModels.Restaurant>, string> GetRestaurantFullName(string PartialName)
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (PartialName != null && PartialName != "")
                 {
@@ -114,7 +114,7 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByNameAscending()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (db.Restaurants.Any())
                 {
@@ -134,7 +134,7 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByNameDescending()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (db.Restaurants.Any())
                 {
@@ -154,7 +154,7 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByLocationCityAscending()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (db.Restaurants.Any())
                 {
@@ -174,7 +174,7 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Restaurant> GetRestaurantsByLocationCityDescending()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (db.Restaurants.Any())
                 {
@@ -194,12 +194,12 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Restaurant> GetAllRestaurantsByReviewDescending()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (db.Restaurants.Any())
                 {
                     var restaurants = db.Restaurants.ToList();
-                    var rest = restaurants.OrderByDescending(x => x.getAvgReview());
+                    var rest = restaurants.OrderByDescending(x => x.GetAvgReview());
                     return rest.Select(x => DataToLibraryRestaurant(x));
                 }
                 else
@@ -215,7 +215,7 @@ namespace RReviews.DAL
 
         public static IEnumerable<RestaurantModels.Restaurant> GetBestReviewedRestaurantsTop3()
         {
-            using (RReviewsEntities db = new RReviewsEntities())
+            //using (RReviewsEntities db = new RReviewsEntities())
             {
                 if (db.Restaurants.Any())
                 {
@@ -245,8 +245,13 @@ namespace RReviews.DAL
                 City = libModel.City,
                 State = libModel.State,
                 FoodType = libModel.FoodType,
-                OperationHours = libModel.OperationHours
+                OperationHours = libModel.OperationHours,
+                Reviews = new List<Review>()
             };
+            foreach (var item in libModel.Reviews)
+            {
+                dataModel.Reviews.Add(LibraryToData(item));
+            }
             return dataModel;
         }
         public static Review LibraryToData(RestaurantModels.Review libModel)
@@ -267,8 +272,13 @@ namespace RReviews.DAL
             {
                 ID = dataModel.ID,
                 FoodType = dataModel.FoodType,
-                OperationHours = dataModel.OperationHours
+                OperationHours = dataModel.OperationHours,
+                Reviews = new List<RestaurantModels.Review>()
             };
+            foreach (var item in dataModel.Reviews)
+            {
+                libModel.Reviews.Add(DataToLibraryReview(item));
+            }
             return libModel;
         }
         public static RestaurantModels.Review DataToLibraryReview(Review dataModel)

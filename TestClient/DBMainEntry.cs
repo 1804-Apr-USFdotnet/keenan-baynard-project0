@@ -45,7 +45,7 @@ namespace TestClient
                         top = RestaurantAccessLibrary.GetBestReviewedRestaurantsTop3();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetReviewsByRestaurantID(item.ID).Average(x => x.ReviewRating));
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetRestaurantByID(item.ID).GetAvgReview());
                         }
                         goto Start;
                     case "all review":
@@ -53,7 +53,7 @@ namespace TestClient
                         top = RestaurantAccessLibrary.GetAllRestaurantsByReviewDescending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetReviewsByRestaurantID(item.ID).Average(x => x.ReviewRating));
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetRestaurantByID(item.ID).GetAvgReview());
                         }
                         goto Start;
                     case "all name asc":
@@ -172,7 +172,7 @@ namespace TestClient
                         break;
                     case "avg":
                         Console.WriteLine();
-                        Console.WriteLine("Average Review Rating: " + RestaurantAccessLibrary.GetAvgReview(restaurant));
+                        Console.WriteLine("Average Review Rating: " + restaurant.GetAvgReview());
                         break;
                     case "info":
                         Console.WriteLine();

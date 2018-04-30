@@ -13,7 +13,7 @@ namespace RestaurantModels
         public string City { get; private set; }
         public string State { get; private set; }
         public string Name { get; private set; }
-        public List<Review> Reviews { get; private set; }
+        public List<Review> Reviews { get; set; }
         public string FoodType { get; set; }
         public string OperationHours { get; set; }
 
@@ -38,7 +38,7 @@ namespace RestaurantModels
 
         public double GetAvgReview()
         {
-            double result = Reviews.Sum(item => item.ReviewRating) / Reviews.Count;
+            double result = Reviews.Sum(x => x.ReviewRating) / Reviews.Count;
             return Math.Round(result, 2);
         }
 
