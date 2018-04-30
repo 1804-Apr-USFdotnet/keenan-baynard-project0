@@ -199,7 +199,7 @@ namespace RReviews.DAL
                 if (db.Restaurants.Any())
                 {
                     var restaurants = db.Restaurants.ToList();
-                    var rest =  restaurants.OrderByDescending(x => x.getAvgReview());
+                    var rest = restaurants.OrderByDescending(x => x.getAvgReview());
                     return rest.Select(x => DataToLibraryRestaurant(x));
                 }
                 else
@@ -257,7 +257,7 @@ namespace RReviews.DAL
                 ReviewerComment = libModel.ReviewComment,
                 ReviewerRating = libModel.ReviewRating,
                 RestaurantID = libModel.RestaurantID,
-                DateSubmitted= libModel.DateSubmitted
+                DateSubmitted = libModel.DateSubmitted
             };
             return dataModel;
         }

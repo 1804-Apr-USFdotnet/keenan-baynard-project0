@@ -142,7 +142,7 @@ namespace RReviewsUnitTest
 
             List<Restaurant> actual = SearchRestaurantsSer.GetRestaurantsByNameDescending();
 
-            CollectionAssert.AreEqual(expected,actual);
+            CollectionAssert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void GetRestaurantsByLocationCityAscendingUnitTest()
