@@ -118,7 +118,12 @@ namespace TestClient
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("Type 'select' and then Restaurant name to select it ");
             Console.WriteLine("Type 'back' to go back");
+            Console.WriteLine();
             option = Console.ReadLine();
+            if (option.Equals("back"))
+            {
+                Find();
+            }
             if (option.Length > 6)
             {
                 if (option.Substring(0, 6).Equals("select"))
@@ -165,7 +170,7 @@ namespace TestClient
                         Find();
                         break;
                     case "get":
-                        foreach (var item in RestaurantAccessLibrary.GetReviewsByRestaurantID(restaurant.ID))
+                        foreach (var item in RestaurantAccessLibrary.GetRestaurantByID(restaurant.ID).Reviews)
                         {
                             Console.WriteLine(item.GetFormattedReview());
                         }

@@ -64,9 +64,9 @@
     <Compile Include="Ser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RestaurantModels\Restaurant.Models.csproj">
+    <ProjectReference Include="..\RestaurantModels\RReviews.Models.csproj">
       <Project>{a91dcd07-4d65-432a-ac53-a17f31d19490}</Project>
-      <Name>Restaurant.Models</Name>
+      <Name>RReviews.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\RReviews.DAL\RReviews.DAL.csproj">
       <Project>{943804e8-17db-4f35-a033-0e4cdf8eb453}</Project>

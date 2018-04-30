@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RReviews.BLL", "RReviews.BL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RReviews.DAL", "RReviews.DAL\RReviews.DAL.csproj", "{943804E8-17DB-4F35-A033-0E4CDF8EB453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant.Models", "RestaurantModels\Restaurant.Models.csproj", "{A91DCD07-4D65-432A-AC53-A17F31D19490}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RReviews.Models", "RestaurantModels\RReviews.Models.csproj", "{A91DCD07-4D65-432A-AC53-A17F31D19490}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RReviews.UnitTest", "RReviewsUnitTest\RReviews.UnitTest.csproj", "{4FE2E621-2CBE-47FE-92B9-8FEB08664135}"
 EndProject
