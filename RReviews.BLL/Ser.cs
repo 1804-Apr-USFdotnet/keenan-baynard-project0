@@ -24,7 +24,7 @@ namespace RReviews.BLL
         }
         public static void CreateList()
         {
-            SearchRestaurants.restaurants = Deserialize(System.IO.File.ReadAllText(ConfigurationManager.AppSettings["jsonPath"]));
+            SearchRestaurantsSer.restaurants = Deserialize(System.IO.File.ReadAllText(ConfigurationManager.AppSettings["jsonPath"]));
         }
     }
 }

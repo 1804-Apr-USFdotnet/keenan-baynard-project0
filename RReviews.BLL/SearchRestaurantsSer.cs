@@ -9,7 +9,7 @@ using NLog;
 
 namespace RReviews.BLL
 {
-    public static class SearchRestaurants
+    public static class SearchRestaurantsSer
     {
         private static Logger log = NLog.LogManager.GetCurrentClassLogger();
         public static List<RestaurantModels.Restaurant> restaurants = new List<RestaurantModels.Restaurant>();

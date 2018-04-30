@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RReviews.BLL;
 using RestaurantModels;
+using NLog;
 
 namespace TestClient
 {
@@ -12,7 +13,7 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-
+            Logger log = LogManager.GetCurrentClassLogger();
             Start:
             Console.WriteLine();
             Console.WriteLine("What would you like to do?: ");
@@ -28,7 +29,7 @@ namespace TestClient
             while (true)
             {
                 IEnumerable<Restaurant> top;
-                IEnumerable<RReviews.DAL.Restaurant> top2;
+                //IEnumerable<RReviews.DAL.Restaurant> top2;
                 string option = Console.ReadLine();
                 switch (option)
                 {
@@ -41,18 +42,18 @@ namespace TestClient
                         break;
                     case "top":
                         Console.WriteLine();
-                        top2 = RestaurantAccessLibrary.GetBestReviewedRestaurantsTop3();
-                        foreach (var item in top2)
+                        top = RestaurantAccessLibrary.GetBestReviewedRestaurantsTop3();
+                        foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.getAvgReview());
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetReviewsByRestaurantID(item.ID).Average(x => x.ReviewRating));
                         }
                         goto Start;
                     case "all review":
                         Console.WriteLine();
-                        top2 = RestaurantAccessLibrary.GetAllRestaurantsByReviewDescending();
-                        foreach (var item in top2)
+                        top = RestaurantAccessLibrary.GetAllRestaurantsByReviewDescending();
+                        foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.getAvgReview());
+                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + RestaurantAccessLibrary.GetReviewsByRestaurantID(item.ID).Average(x => x.ReviewRating));
                         }
                         goto Start;
                     case "all name asc":
@@ -60,7 +61,7 @@ namespace TestClient
                         top = RestaurantAccessLibrary.GetRestaurantsByNameAscending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                            Console.WriteLine("Restaurant Name: " + item.Name);
                         }
                         goto Start;
                     case "all name desc":
@@ -68,7 +69,7 @@ namespace TestClient
                         top = RestaurantAccessLibrary.GetRestaurantsByNameDescending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                            Console.WriteLine("Restaurant Name: " + item.Name);
                         }
                         goto Start;
                     case "all city asc":
@@ -76,7 +77,7 @@ namespace TestClient
                         top = RestaurantAccessLibrary.GetRestaurantsByLocationCityAscending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                            Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name);
                         }
                         goto Start;
                     case "all city desc":
@@ -84,11 +85,12 @@ namespace TestClient
                         top = RestaurantAccessLibrary.GetRestaurantsByLocationCityDescending();
                         foreach (var item in top)
                         {
-                            Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
+                            Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name);
                         }
                         goto Start;
 
                     default:
+                        log.Error($"{option} is not a valid option");
                         Console.WriteLine("Enter Valid Option");
                         Console.WriteLine();
                         goto Start;
@@ -98,6 +100,7 @@ namespace TestClient
     }
     static class Running
     {
+        static Logger log = LogManager.GetCurrentClassLogger();
         internal static void Find()
         {
             string option;
@@ -108,6 +111,7 @@ namespace TestClient
             {
                 Console.WriteLine();
                 Console.WriteLine("Make sure search is a name, or try shortening the search");
+                log.Error($"{Search} is not a valid entry");
                 Find();
             }
             Console.WriteLine();
@@ -127,24 +131,23 @@ namespace TestClient
         internal static void Select(string selected)
         {
             Console.WriteLine("Selected: " + selected);
-            RestaurantModels.Restaurant restaurant = RestaurantAccessLibrary.GetRestaurantByName(selected);
-            if (restaurant == null)
+            try
             {
-
+                RestaurantModels.Restaurant restaurant = RestaurantAccessLibrary.GetRestaurantByName(selected);
+                AddReview(restaurant);
+            }
+            catch (Exception e)
+            {
+                log.Error($"{selected} cannot be converted or does not exist");
                 Console.WriteLine();
                 Console.WriteLine("Please enter correct restaurant name");
                 Find();
-            }
-            else
-            {
-                AddReview(restaurant);
             }
         }
         internal static void AddReview(RestaurantModels.Restaurant restaurant)
         {
             while (true)
             {
-                //check if entry is a valid restaurant name
                 Console.WriteLine();
                 Console.WriteLine("Type 'add' to add review to restaurant");
                 Console.WriteLine("Type 'get' to see all reviews for restaurant");
@@ -180,6 +183,7 @@ namespace TestClient
                         break;
                     default:
                         Console.WriteLine("Enter Valid Option");
+                        log.Error($"{option} is not a valid option");
                         break;
                 }
             }

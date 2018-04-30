@@ -38,7 +38,7 @@ namespace RReviews.DAL
                 var reviews = db.Reviews.ToList();
                 var lreviews = reviews.FindAll((x => x.RestaurantID.Equals(ID)));
                 Console.WriteLine("Getting another avg");
-                return lreviews.Select(x => x.ReviewerRating).Average();
+                return Math.Round(lreviews.Select(x => x.ReviewerRating).Average(),2);
             }
         }
     }

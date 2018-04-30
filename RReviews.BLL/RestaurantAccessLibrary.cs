@@ -85,12 +85,12 @@ namespace RReviews.BLL
             return RestaurantAccessData.GetRestaurantsByLocationCityDescending();
         }
 
-        public static IEnumerable<Restaurant> GetAllRestaurantsByReviewDescending()
+        public static IEnumerable<RestaurantModels.Restaurant> GetAllRestaurantsByReviewDescending()
         {
             return RestaurantAccessData.GetAllRestaurantsByReviewDescending();
         }
 
-        public static IEnumerable<Restaurant> GetBestReviewedRestaurantsTop3()
+        public static IEnumerable<RestaurantModels.Restaurant> GetBestReviewedRestaurantsTop3()
         {
             return RestaurantAccessData.GetBestReviewedRestaurantsTop3();
         }

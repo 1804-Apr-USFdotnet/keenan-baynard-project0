@@ -55,7 +55,7 @@ namespace RReviews.Client
                         break;
                     case "top":
                         Console.WriteLine();
-                        top = SearchRestaurants.GetBestReviewedRestaurantsTop3();
+                        top = SearchRestaurantsSer.GetBestReviewedRestaurantsTop3();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
@@ -63,7 +63,7 @@ namespace RReviews.Client
                         goto Start;
                     case "all review":
                         Console.WriteLine();
-                        top = SearchRestaurants.GetAllRestaurantsByReviewDescending();
+                        top = SearchRestaurantsSer.GetAllRestaurantsByReviewDescending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
@@ -71,7 +71,7 @@ namespace RReviews.Client
                         goto Start;
                     case "all name asc":
                         Console.WriteLine();
-                        top = SearchRestaurants.GetRestaurantsByNameAscending();
+                        top = SearchRestaurantsSer.GetRestaurantsByNameAscending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
@@ -79,7 +79,7 @@ namespace RReviews.Client
                         goto Start;
                     case "all name desc":
                         Console.WriteLine();
-                        top = SearchRestaurants.GetRestaurantsByNameDescending();
+                        top = SearchRestaurantsSer.GetRestaurantsByNameDescending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
@@ -87,7 +87,7 @@ namespace RReviews.Client
                         goto Start;
                     case "all city asc":
                         Console.WriteLine();
-                        top = SearchRestaurants.GetRestaurantsByLocationCityAscending();
+                        top = SearchRestaurantsSer.GetRestaurantsByLocationCityAscending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
@@ -95,7 +95,7 @@ namespace RReviews.Client
                         goto Start;
                     case "all city desc":
                         Console.WriteLine();
-                        top = SearchRestaurants.GetRestaurantsByLocationCityDescending();
+                        top = SearchRestaurantsSer.GetRestaurantsByLocationCityDescending();
                         foreach (var item in top)
                         {
                             Console.WriteLine("Restaurant location: " + item.GetLocation() + ", Restaurant Name: " + item.Name + ", Rating: " + item.GetAvgReview());
@@ -117,8 +117,8 @@ namespace RReviews.Client
             string option;
             Console.Write("Search for restaurant by full or parital name: ");
             string Search = Console.ReadLine();
-            SearchRestaurants.ReturnGetRestaurantFullName(Search);
-            if (SearchRestaurants.GetRestaurantFullName(Search).Item1==null)
+            SearchRestaurantsSer.ReturnGetRestaurantFullName(Search);
+            if (SearchRestaurantsSer.GetRestaurantFullName(Search).Item1==null)
             {
                 Console.WriteLine();
                 Console.WriteLine("Make sure search is a name, or try shortening the search");
@@ -141,7 +141,7 @@ namespace RReviews.Client
         internal static void Select(string selected)
         {
             Console.WriteLine("Selected: " + selected);
-            Restaurant restaurant = SearchRestaurants.restaurants.Find((x => x.Name.Equals(selected, StringComparison.InvariantCultureIgnoreCase)));
+            Restaurant restaurant = SearchRestaurantsSer.restaurants.Find((x => x.Name.Equals(selected, StringComparison.InvariantCultureIgnoreCase)));
             if (restaurant == null)
             {
 
@@ -200,7 +200,7 @@ namespace RReviews.Client
         }
         internal static void Exit()
         {
-            Ser.Serialize(SearchRestaurants.restaurants);
+            Ser.Serialize(SearchRestaurantsSer.restaurants);
             Environment.Exit(0);
         }
     }

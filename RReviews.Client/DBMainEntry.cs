@@ -12,7 +12,6 @@ namespace TestClient
     {
         static void Main(string[] args)
         {
-
             Start:
             Console.WriteLine();
             Console.WriteLine("What would you like to do?: ");
@@ -145,7 +144,6 @@ namespace TestClient
         {
             while (true)
             {
-                //check if entry is a valid restaurant name
                 Console.WriteLine();
                 Console.WriteLine("Type 'add' to add review to restaurant");
                 Console.WriteLine("Type 'get' to see all reviews for restaurant");
