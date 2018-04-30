@@ -12,7 +12,7 @@ namespace RReviews.DAL
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     public partial class Restaurant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,25 +20,25 @@ namespace RReviews.DAL
         {
             this.Reviews = new HashSet<Review>();
         }
-    
+
         public int ID { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Name { get; set; }
         public string FoodType { get; set; }
         public string OperationHours { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Review> Reviews { get; set; }
 
         public double getAvgReview()
         {
-            using(RReviewsEntities db = new RReviewsEntities())
+            using (RReviewsEntities db = new RReviewsEntities())
             {
                 var reviews = db.Reviews.ToList();
                 var lreviews = reviews.FindAll((x => x.RestaurantID.Equals(ID)));
                 Console.WriteLine("Getting another avg");
-                return Math.Round(lreviews.Select(x => x.ReviewerRating).Average(),2);
+                return Math.Round(lreviews.Select(x => x.ReviewerRating).Average(), 2);
             }
         }
     }
